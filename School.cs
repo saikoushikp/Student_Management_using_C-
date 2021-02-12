@@ -1,10 +1,12 @@
-using System.Collections.Generic;
 using System;
-namespace task1
+using System.Collections.Generic;
+using System.Text;
+
+namespace Student_Management_System
 {
-    public class school
+    public class School
     {
-        public static List<Student> StudentList= new List<Student>();
+        public String SchoolName;
+        public static List<Student> StudentList = new List<Student>();
     }
 }
-

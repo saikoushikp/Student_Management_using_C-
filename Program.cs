@@ -34,13 +34,13 @@ namespace Student_Management_System
                 switch (x)
                 {
                     case 1:
-                        Services.AddStudent();
+                        SchoolServices.AddStudent();
                         break;
                     case 2:
-                        Services.AddMarks();
+                        SchoolServices.AddMarks();
                         break;
                     case 3:
-                        Services.ProgressCard();
+                        SchoolServices.ProgressCard();
                         break;
                     default:
                         Console.WriteLine("Incorrect Option!");

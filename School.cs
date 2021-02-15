@@ -10,3 +10,4 @@ namespace Student_Management_System
         public static List<Student> StudentList = new List<Student>();
     }
 }
+ 

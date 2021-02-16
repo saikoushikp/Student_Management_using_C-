@@ -6,32 +6,33 @@ namespace Student_Management_System
 {
     class SchoolServices
     {
-       public static void AddStudent()
+        School ss = new School();
+       public void AddStudent()
         {
             Student s1=new Student();
             Console.WriteLine("Enter Student name:");
-            s1.Name = Console.ReadLine();
+            s1.name = Console.ReadLine();
             Console.WriteLine("Enter student roll number:");
             int result = -1;
             int x = -1;
             while (x != 0)
             {
                 result = Convert.ToInt32(Console.ReadLine());
-                x = SchoolServices.CheckDuplicates(result);
+                x = CheckDuplicates(result);
                 if (x == 0)
                     break;
                 Console.WriteLine("Student roll number already exists enter a valid one");
             }
             s1.rollnumber = result;
-            School.StudentList.Add(s1);
+            ss.StudentList.Add(s1);
             Console.WriteLine("Student details are added successfully");
             Console.WriteLine("Press any key to continue");
             Console.ReadLine();
         }
 
-        public static void AddMarks()
+        public void AddMarks()
         {
-            if (School.StudentList.Count == 0)
+            if (ss.StudentList.Count == 0)
             {
                 Console.WriteLine("NO Student Exist");
             }
@@ -39,10 +40,12 @@ namespace Student_Management_System
             {
                 Console.WriteLine("Enter student roll number:");
                 int roll = Convert.ToInt32(Console.ReadLine());
-                foreach (Student y in School.StudentList)
+                foreach (Student y in ss.StudentList)
                 {
                     if (y.rollnumber == roll)
                     {
+                        y.totalMarks = 0;
+                        y.percentage = 0.0;
                         int cnt = 0;
                         foreach (Subjects s in Enum.GetValues(typeof(Subjects)))
                         {
@@ -61,9 +64,9 @@ namespace Student_Management_System
                 Console.WriteLine();
             }
         }
-        public static void ProgressCard()
+        public void ProgressCard()
         {
-            if (School.StudentList.Count == 0)
+            if (ss.StudentList.Count == 0)
             {
                 Console.WriteLine("NO Student Exist");
             }
@@ -71,12 +74,12 @@ namespace Student_Management_System
             {
                 Console.WriteLine("Enter student roll number");
                 int rol = Convert.ToInt32(Console.ReadLine());
-                foreach (Student z in School.StudentList)
+                foreach (Student z in ss.StudentList)
                 {
                     if (z.rollnumber == rol)
                     {
                         Console.WriteLine("Student Roll Number:" + z.rollnumber);
-                        Console.WriteLine("Student Name:" + z.Name);
+                        Console.WriteLine("Student Name:" + z.name);
                         Console.WriteLine("Student marks\n");
                         for (int i = 0; i < 20; i++)
                             Console.Write("-");
@@ -99,10 +102,10 @@ namespace Student_Management_System
                 }
             }
         }
-        public static int CheckDuplicates(int a)
+        public int CheckDuplicates(int a)
         {
             int flag = 0;
-            foreach (var item in School.StudentList)
+            foreach (var item in ss.StudentList)
             {
                 if (item.rollnumber == a)
                     flag = 1;

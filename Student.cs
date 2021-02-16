@@ -6,12 +6,13 @@ namespace Student_Management_System
 {
     public class Student
     {
-        public String Name;
-        public int rollnumber;
-        public int totalMarks = 0;
-        public double percentage = 0.0;
+        public String name { get; set; }
+        public int rollnumber { get; set; }
+        public int totalMarks { get; set; } 
+        public double percentage { get; set; } 
 
-        public int[] marks = new int[6];
+        public int[] marks { get; set; } = new int[6];
+
 
     }
 }

@@ -20,6 +20,7 @@ namespace Student_Management_System
         }
         public static void Main(String[] args)
         {
+            SchoolServices ss = new SchoolServices();
             Console.WriteLine("Enter school name");
             School s = new School();
             s.SchoolName = Console.ReadLine();
@@ -34,13 +35,13 @@ namespace Student_Management_System
                 switch (x)
                 {
                     case 1:
-                        SchoolServices.AddStudent();
+                        ss.AddStudent();
                         break;
                     case 2:
-                        SchoolServices.AddMarks();
+                        ss.AddMarks();
                         break;
                     case 3:
-                        SchoolServices.ProgressCard();
+                        ss.ProgressCard();
                         break;
                     default:
                         Console.WriteLine("Incorrect Option!");

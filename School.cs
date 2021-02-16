@@ -7,7 +7,6 @@ namespace Student_Management_System
     public class School
     {
         public String SchoolName;
-        public static List<Student> StudentList = new List<Student>();
+        public List<Student> StudentList = new List<Student>();
     }
 }
- 

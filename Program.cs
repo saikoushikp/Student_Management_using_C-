@@ -15,33 +15,54 @@ namespace Student_Management_System
 
         public static int GetOption()
         {
-            int v = Convert.ToInt32(Console.ReadLine());
-            return v;
+            int option = Convert.ToInt32(Console.ReadLine());
+            return option;
         }
         public static void Main(String[] args)
         {
-            SchoolServices ss = new SchoolServices();
+            SchoolServices service = new SchoolServices();
             Console.WriteLine("Enter school name");
-            School s = new School();
-            s.SchoolName = Console.ReadLine();
-            Console.WriteLine("Welcome to " + s.SchoolName + " School Student information management");
+            School school = new School();
+            school.SchoolName = Console.ReadLine();
+            Console.WriteLine("Welcome to " + school.SchoolName + " School Student information management");
             for (int i = 0; i < 75; i++)
                 Console.Write("-");
             Console.WriteLine();
-            while (true)
+            while ( true )
             {
                 PrintMenu();
-                int x = GetOption();
-                switch (x)
+                int option = GetOption();
+                switch (option)
                 {
                     case 1:
-                        ss.AddStudent();
+                        Console.WriteLine("Enter student name:");
+                        String name = Console.ReadLine();
+                        Console.WriteLine("Enter student roll number:");
+                        int rollnumber = -1;
+                        int x = -1;
+                        while (x != 0)
+                        {
+                            rollnumber = Convert.ToInt32(Console.ReadLine());
+                            x = service.CheckDuplicates(rollnumber);
+                            if (x == 0)
+                                break;
+                            Console.WriteLine("Student roll number already exists enter a valid one");
+                            
+                        }
+                        service.AddStudent(name,rollnumber);
+                        Console.WriteLine("Student details are added successfully");
+                        Console.WriteLine("Press any key to continue");
+                        Console.ReadLine();
                         break;
                     case 2:
-                        ss.AddMarks();
+                        service.AddMarks();
+                        Console.WriteLine("Student marks are added successfully");
+                        Console.WriteLine("Enter any key to continue");
+                        Console.WriteLine();
                         break;
                     case 3:
-                        ss.ProgressCard();
+                        service.ProgressCard();
+                                
                         break;
                     default:
                         Console.WriteLine("Incorrect Option!");

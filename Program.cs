@@ -13,6 +13,8 @@ namespace Student_Management_System
             Console.WriteLine("Please provide valid input from menu options");
         }
 
+        
+
         public static int GetOption()
         {
             int option = Convert.ToInt32(Console.ReadLine());
@@ -21,10 +23,10 @@ namespace Student_Management_System
         public static void Main(String[] args)
         {
             SchoolServices service = new SchoolServices();
-            Console.WriteLine("Enter school name");
-            School school = new School();
-            school.SchoolName = Console.ReadLine();
-            Console.WriteLine("Welcome to " + school.SchoolName + " School Student information management");
+            Console.WriteLine("Enter school name:");
+            String skool = Console.ReadLine();
+            service.AddSchoool(skool);
+            Console.WriteLine("Welcome to " + skool + " School Student information management");
             for (int i = 0; i < 75; i++)
                 Console.Write("-");
             Console.WriteLine();
@@ -55,14 +57,28 @@ namespace Student_Management_System
                         Console.ReadLine();
                         break;
                     case 2:
-                        service.AddMarks();
-                        Console.WriteLine("Student marks are added successfully");
-                        Console.WriteLine("Enter any key to continue");
-                        Console.WriteLine();
+                        if (service.CheckStudent() == false)
+                        {
+                            Console.WriteLine("No student exists");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter student roll number");
+                            int rollNumber = Convert.ToInt32(Console.ReadLine());
+                            service.AddMarks(rollNumber);
+                        }
                         break;
                     case 3:
-                        service.ProgressCard();
-                                
+                        if(service.CheckStudent()== false)
+                        {
+                            Console.WriteLine("No student exists!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter roll number of student:");
+                            int rolnumber = Convert.ToInt32(Console.ReadLine());
+                            service.ProgressCard(rolnumber);
+                        }      
                         break;
                     default:
                         Console.WriteLine("Incorrect Option!");

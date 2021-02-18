@@ -4,6 +4,7 @@ namespace Student_Management_System
 {
     class Program
     {
+        
         public static void PrintMenu()
         {
             Console.WriteLine("1.Add Student");
@@ -57,6 +58,7 @@ namespace Student_Management_System
                         Console.ReadLine();
                         break;
                     case 2:
+                        Helper helper = new Helper();
                         if (service.CheckStudent() == false)
                         {
                             Console.WriteLine("No student exists");
@@ -65,7 +67,24 @@ namespace Student_Management_System
                         {
                             Console.WriteLine("Enter student roll number");
                             int rollNumber = Convert.ToInt32(Console.ReadLine());
-                            service.AddMarks(rollNumber);
+                            Student  exists=service.GetStudent(rollNumber);
+                            if (helper.CheckStudent(exists))
+                            {
+
+
+                                int cnt = 0;
+                                String subjectname = "";
+                                int marks = 0;
+                                foreach (Subjects s in Enum.GetValues(typeof(Subjects)))
+                                {
+                                    subjectname = helper.GetSubjectName(cnt);
+                                    marks = Convert.ToInt32(Console.ReadLine());
+                                    service.AddMarks(rollNumber, subjectname, marks);
+                                    cnt++;
+                                }
+                            }
+                            else
+                                helper.NoStudent();
                         }
                         break;
                     case 3:

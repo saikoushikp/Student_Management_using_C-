@@ -7,7 +7,8 @@ namespace Student_Management_System
     class SchoolServices
     {
         School school = new School();
-        Helper help = new Helper();
+        Helper helper = new Helper();
+        public int cnt = 0;
 
         public void AddSchoool(String skool)
         {
@@ -32,48 +33,68 @@ namespace Student_Management_System
         }
 
 
-        public void AddMarks(int rollNumber)
+        public void AddMarks(int rollNumber,String subjectName,int marks)
         {
-            foreach (Student student in school.StudentList)
+            
+            Student student = GetStudent(rollNumber);
+            if (helper.isNullable(student) == false)
             {
-                if (student.rollnumber == rollNumber)
-                {
-                    student.totalMarks = 0;
-                    student.percentage = 0.0;
-                    int cnt = 0;
-                    foreach (Subjects s in Enum.GetValues(typeof(Subjects)))
-                    {
-                        help.GetSubjectName(cnt);
-                        student.marks[cnt] = Convert.ToInt32(Console.ReadLine());
-                        student.totalMarks = student.totalMarks + student.marks[cnt];
-                        cnt++;
-                    }
-                    student.percentage = student.totalMarks / (double)6;
-                    student.percentage = (double)System.Math.Round(student.percentage, 3);
-                }
+                if (cnt >= 6)
+                    cnt = 0;
+                student.marks[cnt] = marks;
+                student.totalMarks = student.totalMarks + student.marks[cnt];
+                cnt++;             
+                student.percentage = student.totalMarks / (double)6;
+                student.percentage = (double)System.Math.Round(student.percentage, 3);
             }
+            else
+                helper.NoStudent();
         }
+
+        
+            
+        
+
+        public Student GetStudent(int rolnumber)
+        {
+            #nullable enable
+            Student? student = null;
+            foreach(Student student1 in school.StudentList)
+            {
+                if (student1.rollnumber == rolnumber)
+                    student=student1;
+            }
+            return student;
+        }
+
+
         public void ProgressCard(int rolnumber)
         {
-            foreach (Student student in school.StudentList)
+            Student student = GetStudent(rolnumber);
+            if (helper.CheckStudent(student))
             {
-                if (student.rollnumber == rolnumber)
-                {
-                    help.DisplayStudentDetails(student,rolnumber);
-                }
-
+                helper.DisplayStudentDetails(student, rolnumber);
             }
+            else
+                helper.NoStudent();
+         }
 
-        }
+            
         
 
         public int CheckDuplicates(int a)
         {
             int flag = 0;
-            foreach ( var student in school.StudentList )
+            Student student = GetStudent(a);
+            if (helper.isNullable(student) == false)
             {
-                if ( student.rollnumber == a )
+
+
+                if (student.rollnumber == a)
                     flag = 1;
+                else
+                    flag = 0;
+                
             }
             return flag;
         }

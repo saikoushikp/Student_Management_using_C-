@@ -7,7 +7,7 @@ namespace Student_Management_System
     public class Student
     {
         public String name { get; set; }
-        public int rollnumber { get; set; }
+        public int rollnumber { get; set; } 
         public int totalMarks { get; set; } 
         public double percentage { get; set; } 
 
